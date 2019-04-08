@@ -3,7 +3,7 @@
   <span v-if="canModify">
     <router-link
       class="btn btn-sm btn-outline-secondary"
-      :to="{ name: 'article-edit', params: { slug: this.article.slug } }"
+      :to="{ name: 'project-edit', params: { slug: this.project.slug } }"
     >
       <i class="ion-edit"></i><span>&nbsp;Edit Article</span>
     </router-link>
@@ -18,7 +18,7 @@
       <i class="ion-plus-round"></i> <span>&nbsp;</span>
       <span
         >{{ profile.following ? "Unfollow" : "Follow" }}
-        {{ article.author.username }}</span
+        {{ project.author.username }}</span
       >
     </button>
     <span>&nbsp;&nbsp;</span>
@@ -26,15 +26,15 @@
       class="btn btn-sm"
       @click="toggleFavorite"
       :class="{
-        'btn-primary': article.favorited,
-        'btn-outline-primary': !article.favorited
+        'btn-primary': project.favorited,
+        'btn-outline-primary': !project.favorited
       }"
     >
       <i class="ion-heart"></i><span>&nbsp;</span>
       <span>
-        {{ article.favorited ? "Unfavorite Article" : "Favorite Article" }}
+        {{ project.favorited ? "Unfavorite Article" : "Favorite Article" }}
       </span>
-      <span class="counter"> ({{ article.favoritesCount }}) </span>
+      <span class="counter"> ({{ project.favoritesCount }}) </span>
     </button>
   </span>
 </template>
@@ -52,7 +52,7 @@ import {
 export default {
   name: "RwvArticleActions",
   props: {
-    article: { type: Object, required: true },
+    project: { type: Object, required: true },
     canModify: { type: Boolean, required: true }
   },
   computed: {
@@ -64,15 +64,15 @@ export default {
         this.$router.push({ name: "login" });
         return;
       }
-      const action = this.article.favorited ? FAVORITE_REMOVE : FAVORITE_ADD;
-      this.$store.dispatch(action, this.article.slug);
+      const action = this.project.favorited ? FAVORITE_REMOVE : FAVORITE_ADD;
+      this.$store.dispatch(action, this.project.slug);
     },
     toggleFollow() {
       if (!this.isAuthenticated) {
         this.$router.push({ name: "login" });
         return;
       }
-      const action = this.article.following
+      const action = this.project.following
         ? FETCH_PROFILE_UNFOLLOW
         : FETCH_PROFILE_FOLLOW;
       this.$store.dispatch(action, {
@@ -81,7 +81,7 @@ export default {
     },
     async deleteArticle() {
       try {
-        await this.$store.dispatch(ARTICLE_DELETE, this.article.slug);
+        await this.$store.dispatch(ARTICLE_DELETE, this.project.slug);
         this.$router.push("/");
       } catch (err) {
         console.error(err);

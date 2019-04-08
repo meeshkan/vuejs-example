@@ -1,10 +1,5 @@
 <template>
-  <router-link
-    :to="{ name: 'home-tag', params: { tag: name } }"
-    :class="className"
-  >
-    {{ name }}
-  </router-link>
+  <div :class="className">{{ name }}</div>
 </template>
 
 <script>
