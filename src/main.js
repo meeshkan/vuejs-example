@@ -12,10 +12,10 @@ Vue.config.productionTip = false;
 Vue.filter("date", DateFilter);
 Vue.filter("error", ErrorFilter);
 
-ApiService.init();
-
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+ApiService.init().then(() => {
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount("#app");
+});

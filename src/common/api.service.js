@@ -1,36 +1,16 @@
 import Vue from "vue";
 import axios from "axios";
-import mock, { proxy } from "xhr-mock";
+import { unmock } from "unmock";
 import VueAxios from "vue-axios";
 import { API_URL } from "@/common/config";
-import projects from "./behance.projects";
-import project from "./behance.project";
-import comments from "./behance.comment";
-
-mock.setup();
-
-mock.get(
-  new RegExp("^https://www.behance.net/v2/projects/[0-9]+/comments(/?)$"),
-  (_, res) => {
-    return res.status(200).body(comments);
-  }
-);
-mock.get(
-  new RegExp("^https://www.behance.net/v2/projects/[0-9]+(/?)$"),
-  (_, res) => {
-    return res.status(200).body(project);
-  }
-);
-mock.get(new RegExp("^https://www.behance.net/v2/projects(/?)$"), (_, res) => {
-  return res.status(200).body(projects);
-});
-// necessary to let all other requests pass through
-mock.use(proxy);
 
 const ApiService = {
-  init() {
+  async init() {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
+    await unmock({
+      ignore: "story"
+    });
   },
 
   query(resource, params) {
