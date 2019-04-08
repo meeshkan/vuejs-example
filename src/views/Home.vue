@@ -8,7 +8,7 @@
     </div>
     <div class="container page">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
@@ -33,15 +33,6 @@
             </ul>
           </div>
           <router-view></router-view>
-        </div>
-        <div class="col-md-3">
-          <div class="sidebar">
-            <p>Popular Tags</p>
-            <div class="tag-list">
-              <RwvTag v-for="(tag, index) in tags" :name="tag" :key="index">
-              </RwvTag>
-            </div>
-          </div>
         </div>
       </div>
     </div>
