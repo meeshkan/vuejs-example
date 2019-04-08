@@ -45,7 +45,6 @@ import marked from "marked";
 import store from "@/store";
 import RwvArticleMeta from "@/components/ArticleMeta";
 import RwvComment from "@/components/Comment";
-import RwvCommentEditor from "@/components/CommentEditor";
 import RwvTag from "@/components/VTag";
 import { FETCH_PROJECT, FETCH_COMMENTS } from "@/store/actions.type";
 
@@ -60,7 +59,6 @@ export default {
   components: {
     RwvArticleMeta,
     RwvComment,
-    RwvCommentEditor,
     RwvTag
   },
   beforeRouteEnter(to, from, next) {
