@@ -2,8 +2,8 @@
   <div class="home-page">
     <div class="banner">
       <div class="container">
-        <h1 class="logo-font">xhr-mock example</h1>
-        <p>Cuz rate limiting sucks.</p>
+        <h1 class="logo-font">unmock example</h1>
+        <p>Mocking the internet since 2019.</p>
       </div>
     </div>
     <div class="container page">
