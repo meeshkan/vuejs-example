@@ -27,7 +27,7 @@ const ApiService = {
   },
 
   async get(resource, slug = "") {
-    nock("https://api.github.com")
+    await nock("https://api.github.com")
       .get("/repos/atom/atom/license")
       .reply(200, {
         license: {
@@ -39,6 +39,10 @@ const ApiService = {
         }
       });
     try {
+      const test = await axios(
+        "https://api.github.com/repos/atom/atom/license"
+      );
+      console.log(test);
       const result = await Vue.axios.get(`${resource}/${slug}`);
       return result;
     } catch (error) {
