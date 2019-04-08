@@ -1,5 +1,6 @@
 import Vue from "vue";
 import axios from "axios";
+import nock from "nock";
 import VueAxios from "vue-axios";
 import JwtService from "@/common/jwt.service";
 import { API_URL } from "@/common/config";
@@ -16,16 +17,33 @@ const ApiService = {
     ] = `Token ${JwtService.getToken()}`;
   },
 
-  query(resource, params) {
-    return Vue.axios.get(resource, params).catch(error => {
+  async query(resource, params) {
+    try {
+      const result = await Vue.axios.get(resource, params);
+      return result;
+    } catch (error) {
       throw new Error(`[RWV] ApiService ${error}`);
-    });
+    }
   },
 
-  get(resource, slug = "") {
-    return Vue.axios.get(`${resource}/${slug}`).catch(error => {
+  async get(resource, slug = "") {
+    nock("https://api.github.com")
+      .get("/repos/atom/atom/license")
+      .reply(200, {
+        license: {
+          key: "mit",
+          name: "MIT License",
+          spdx_id: "MIT",
+          url: "https://api.github.com/licenses/mit",
+          node_id: "MDc6TGljZW5zZTEz"
+        }
+      });
+    try {
+      const result = await Vue.axios.get(`${resource}/${slug}`);
+      return result;
+    } catch (error) {
       throw new Error(`[RWV] ApiService ${error}`);
-    });
+    }
   },
 
   post(resource, params) {
