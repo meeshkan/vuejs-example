@@ -2,8 +2,8 @@
   <div class="home-page">
     <div class="banner">
       <div class="container">
-        <h1 class="logo-font">conduit</h1>
-        <p>A place to share your knowledge.</p>
+        <h1 class="logo-font">nock example</h1>
+        <p>Don't (k)nock it till you've tried it!</p>
       </div>
     </div>
     <div class="container page">
