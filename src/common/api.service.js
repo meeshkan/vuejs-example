@@ -5,6 +5,21 @@ import VueAxios from "vue-axios";
 import JwtService from "@/common/jwt.service";
 import { API_URL } from "@/common/config";
 
+mock.setup();
+mock.get("https://api.github.com/repos/atom/atom/license", (_, res) => {
+  return res.status(200).body({
+    license: {
+      key: "mit",
+      name: "MIT License",
+      spdx_id: "MIT",
+      url: "https://api.github.com/licenses/mit",
+      node_id: "MDc6TGljZW5zZTEz"
+    }
+  });
+});
+// necessary to let all other requests pass through
+mock.use(proxy);
+
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
@@ -28,19 +43,6 @@ const ApiService = {
 
   async get(resource, slug = "") {
     try {
-      mock.setup();
-      mock.get("https://api.github.com/repos/atom/atom/license", (_, res) => {
-        return res.status(200).body({
-          license: {
-            key: "mit",
-            name: "MIT License",
-            spdx_id: "MIT",
-            url: "https://api.github.com/licenses/mit",
-            node_id: "MDc6TGljZW5zZTEz"
-          }
-        });
-      });
-      mock.use(proxy);
       const test = await axios(
         "https://api.github.com/repos/atom/atom/license"
       );
