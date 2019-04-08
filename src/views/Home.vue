@@ -11,15 +11,6 @@
         <div class="col-md-9">
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
-              <li v-if="isAuthenticated" class="nav-item">
-                <router-link
-                  :to="{ name: 'home-my-feed' }"
-                  class="nav-link"
-                  active-class="active"
-                >
-                  Your Feed
-                </router-link>
-              </li>
               <li class="nav-item">
                 <router-link
                   :to="{ name: 'home' }"
